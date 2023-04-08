@@ -10,6 +10,17 @@ class TrajectoryCalculator(BaseEstimator, TransformerMixin):
         flight_points = X['flight_points']
 
         trajectories = df_to_trajectories(flight_points)
+      
+        return {'trajectories': trajectories}
+
+class NormalizedTrajectoryCalculator(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        flight_points = X['flight_points']
+
+        trajectories = df_to_trajectories(flight_points)
         trajectories = [remove_taxi(trajectory) for trajectory in trajectories]
         points_num = max([len(trajectory) for trajectory in trajectories])
         trajectories = [interpolate_trajectory(trajectory, points_num) for trajectory in trajectories]

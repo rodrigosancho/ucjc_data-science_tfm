@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 from shapely.geometry import LineString
 import cartopy.crs as ccrs
-import folium
+import cartopy.feature as cfeature
 
 def interpolate_altitudes (trajectory, max_length):
     flight_levels = [point.flight_level for point in trajectory]
@@ -40,14 +40,20 @@ def altitude_profile(trajectories, ax):
   ax.set_ylabel('Flight Level')
 
 def show_outliers_map(trajectories, labels, save_as):
-  ax = plt.axes(projection=ccrs.Mercator())
+  ax = plt.axes(projection=ccrs.PlateCarree())
   ax.patch.set_facecolor('white')
 
   plt.setp(ax.spines.values(), color='white')
   plt.setp([ax.get_xticklines(), ax.get_yticklines()], color='white')
 
-  geometry = [LineString([[point.coords[1], point.coords[0]] for point in trajectory]) for trajectory in trajectories]
-  routes = gpd.GeoDataFrame(trajectories, geometry=geometry, crs='EPSG:4326')
+  ax.add_feature(cfeature.LAND.with_scale('50m'), facecolor=cfeature.COLORS['land'])
+  ax.add_feature(cfeature.OCEAN.with_scale('50m'), facecolor=cfeature.COLORS['water'])
+  ax.add_feature(cfeature.BORDERS.with_scale('50m'), linewidth=0.5)
+  ax.set_extent([-10, 5, 35, 45], crs=ccrs.PlateCarree())
+
+  geometry = [LineString([(point[1], point[0]) for point in trajectory]) for trajectory in trajectories]
+  data = {'label': labels, 'geometry': geometry}
+  routes = gpd.GeoDataFrame(data, crs='EPSG:4326')
 
   routes['color'] = 'blue'
   routes.loc[labels == -1, 'color'] = 'red'
@@ -56,7 +62,7 @@ def show_outliers_map(trajectories, labels, save_as):
   routes.loc[labels == -1, 'alpha'] = 1
 
   routes.plot(ax=ax, transform=ccrs.Geodetic(), color=routes['color'], linewidth=0.2, alpha=routes['alpha'])
-  plt.savefig(save_as, dpi=300)
+  plt.savefig(save_as, dpi=600)
   plt.show()
 
 

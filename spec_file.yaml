@@ -8,3 +8,7 @@ dependencies:
   - scikit-learn
   - geopy
   - pandas
+  - seaborn
+  - geopandas
+  - cartopy
+  - hdbscan
