@@ -60,19 +60,3 @@ def show_outliers_map(trajectories, labels, save_as):
   plt.show()
 
 
-def show_folium_map(trajectories, labels):
-  # Create a map centered at the average coordinates of the trajectories
-  m = folium.Map(location=trajectories[0][0], zoom_start=7, tiles='cartodbpositron', zoom_control=False)
-
-  # Add the trajectories to the map
-  for i, trajectory in enumerate(trajectories):
-      # Choose a color based on whether the trajectory is anomalous
-      color = 'red' if labels[i] == -1 else 'blue'
-      # Set the line weight and opacity
-      weight = 3 if labels[i] == -1 else 1
-      opacity = 1 if labels[i] == -1 else 0.3
-      folium.PolyLine(trajectory, color=color, weight=weight, opacity=opacity).add_to(m)
-
-  # Display the maps
-  return m
-

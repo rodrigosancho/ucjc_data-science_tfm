@@ -1,0 +1,10 @@
+name: ucjc_tfm_env
+channels:
+  - conda-forge
+dependencies:
+  - python >=3.7,<3.9
+  - ipykernel >=5.1
+  - ipywidgets
+  - scikit-learn
+  - geopy
+  - pandas
