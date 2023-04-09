@@ -1,3 +1,4 @@
+import os
 import seaborn as sns
 import numpy as np
 from scipy.interpolate import interp1d
@@ -8,12 +9,19 @@ from shapely.geometry import LineString
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 
+def ensure_saving_path(path):
+  directory, file_name = os.path.split(path)
+
+  if not os.path.exists(directory):
+      os.makedirs(directory)
+
+
 def interpolate_altitudes (trajectory, max_length):
-    flight_levels = [point.flight_level for point in trajectory]
-    x = np.arange(len(flight_levels))
-    f = interp1d(x, flight_levels)
-    xnew = np.linspace(0, len(flight_levels)-1, max_length)
-    return f(xnew)
+  flight_levels = [point.flight_level for point in trajectory]
+  x = np.arange(len(flight_levels))
+  f = interp1d(x, flight_levels)
+  xnew = np.linspace(0, len(flight_levels)-1, max_length)
+  return f(xnew)
 
 def accumulated_distance(trajectories, ax):
   # Calculamos la distancia de cada punto al origen de su respectiva trayectoria
@@ -62,6 +70,8 @@ def show_outliers_map(trajectories, labels, save_as):
   routes.loc[labels == -1, 'alpha'] = 1
 
   routes.plot(ax=ax, transform=ccrs.Geodetic(), color=routes['color'], linewidth=0.2, alpha=routes['alpha'])
+  
+  ensure_saving_path(save_as)
   plt.savefig(save_as, dpi=600)
   plt.show()
 
