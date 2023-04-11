@@ -72,7 +72,8 @@ def show_outliers_map(trajectories, labels, save_as):
   routes.plot(ax=ax, transform=ccrs.Geodetic(), color=routes['color'], linewidth=0.2, alpha=routes['alpha'])
   
   ensure_saving_path(save_as)
-  plt.savefig(save_as, dpi=600)
+
+  plt.savefig(save_as, dpi=600, bbox_inches='tight')
   plt.show()
 
 

@@ -47,7 +47,7 @@ def SearchDBSCAN(distances, params, method = 'silhouette'):
         "score": score,
       })
 
-    results_ = sorted(results, key=lambda x: x["score"], reverse=True)
+    results_ = sorted(results, key=lambda x: x["score"], reverse=method == 'silhouette')
     best_estimator_ = results_[0]
 
     return {
