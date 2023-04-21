@@ -77,3 +77,36 @@ def show_outliers_map(trajectories, labels, save_as):
   plt.show()
 
 
+def show_elbow_plot(points, elbow_index, save_as):
+  elbow_val = points[elbow_index]
+
+  fig, (ax1, ax2) = plt.subplots(1, 2)
+
+  ax1.plot(points)
+  ax1.set_title('KNN')
+  plt.subplots_adjust(wspace=0.5)
+
+
+  ax2.plot(points)
+  ax2.plot(elbow_index, elbow_val, 'ro')
+
+  ax2.axhline(y=elbow_val, color='r', linestyle='--')
+  ax2.axvline(x=elbow_index, color='r', linestyle='--')
+
+  ax2.set_xticks([elbow_index])
+  ax2.set_yticks([elbow_val])
+
+  ax2.set_title('KNN zoom')
+
+  x_gap = elbow_index * 0.2
+  y_gap = (points[-1] - points[0]) * 0.2
+  
+  x_start = max(elbow_index - x_gap, 0)
+  x_end = elbow_index + x_gap 
+  y_start = max(elbow_val - y_gap, 0)
+  y_end =elbow_val + y_gap
+
+  ax2.axis([x_start,x_end,y_start,y_end])
+
+  plt.savefig(save_as, dpi=600, bbox_inches='tight')
+   
