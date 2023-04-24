@@ -14,6 +14,9 @@ class TrajectoryCalculator(BaseEstimator, TransformerMixin):
         return {'trajectories': trajectories}
 
 class NormalizedTrajectoryCalculator(BaseEstimator, TransformerMixin):
+    def __init__(self, clean_taxi = True):
+        self.clean_taxi = clean_taxi
+    
     def fit(self, X, y=None):
         return self
 
@@ -21,7 +24,7 @@ class NormalizedTrajectoryCalculator(BaseEstimator, TransformerMixin):
         flight_points = X['flight_points']
 
         trajectories = df_to_trajectories(flight_points)
-        trajectories = [remove_taxi(trajectory) for trajectory in trajectories]
+        trajectories = [remove_taxi(trajectory) if self.clean_taxi else trajectory for trajectory in trajectories]
         points_num = max([len(trajectory) for trajectory in trajectories])
         trajectories = [interpolate_trajectory(trajectory, points_num) for trajectory in trajectories]
         trajectories = [np.array([point.coords for point in trajectory]) for trajectory in trajectories]

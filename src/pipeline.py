@@ -1,8 +1,7 @@
 from sklearn.pipeline import FeatureUnion
-from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
 
-from src.features.trajectory_calculator import NormalizedTrajectoryCalculator
+from src.features.trajectory_calculator import NormalizedTrajectoryCalculator, TrajectoryCalculator
 from src.features.epsilon_calculator import EpsilonCalculator
 from src.features.distance_matrix import DistanceMatrix
 from src.models.sspd_calculator import SSPDCalculator
@@ -28,11 +27,11 @@ def build_hdbscan_pipeline(distance_fn, validation_method):
       ('hdbscan_model', HDBSCANCalculator(validation_method, distance_fn)),
   ])
 
-def build_data_pipeline(flights_path, flights_points_path, departure, destinations):
+def build_data_pipeline(flights_path, flights_points_path, departure, destinations, clean_taxi):
    return Pipeline([
       ('data_loader', DataLoader(flights_path, flights_points_path)),
       ('flight_filter', FlightFilter(departure, destinations)),
-      ('trajectory_calculator', NormalizedTrajectoryCalculator())
+      ('trajectory_calculator', NormalizedTrajectoryCalculator(clean_taxi))
    ])
     
 def build_models_pipeline():
