@@ -1,7 +1,11 @@
 
-# Resume
+# Case 4
 
-## Silhouette
+Flight from Madrid to Alicante, Barcelona, Bilbao, Coruña, Córdoba, Granada and Jerez taking into account the taxi period.
+
+## Resume
+
+### Silhouette
 
 Best algorithm/function distance configuration based on silhouette score.
 
@@ -19,7 +23,7 @@ Score represents the quality of the clustering. The best score is 1.0 and the wo
 | erp_distance  | ![](dbscan/erp_distances/silhouette/outliers.png) | ![](hdbscan/sspd_distances/silhouette/outliers.png) |
 | sspd_distance | ![](dbscan/erp_distances/silhouette/outliers.png) | ![](hdbscan/sspd_distances/silhouette/outliers.png) |
 
-## Davies-Bouldin
+### Davies-Bouldin
 
 Best algorithm/function distance configuration based on davies_bouldin score.
 
@@ -41,7 +45,7 @@ The minimum score is zero, with lower values indicating better clustering.
 
 # silhouette
 
-## dbscan
+### dbscan
 
 Finding the best eps value.
 
@@ -51,9 +55,9 @@ In order to calculate the best eps value, first, the nearest neighbors of the da
 
 As a custom distance function it is used, the distance between trajectories are normalized and epsilon values may not be true magnitudes.
 
-### sspd_distances
+#### sspd_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |    noise | method     |    score |       eps |   min_samples |
 |-----------:|-----------:|---------:|:-----------|---------:|----------:|--------------:|
@@ -68,7 +72,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |         16 |        192 | 11.2281  | silhouette | 0.642228 | 0.0141249 |            15 |
 |         16 |        173 | 10.117   | silhouette | 0.640286 | 0.0141249 |            11 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method     |    score |       eps |   min_samples |
 |-----------:|-----------:|--------:|:-----------|---------:|----------:|--------------:|
@@ -76,9 +80,9 @@ As a custom distance function it is used, the distance between trajectories are 
 
 ![](dbscan/sspd_distances/silhouette/outliers.png)
 
-### erp_distances
+#### erp_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |    noise | method     |    score |     eps |   min_samples |
 |-----------:|-----------:|---------:|:-----------|---------:|--------:|--------------:|
@@ -93,7 +97,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |         20 |        277 | 16.1988  | silhouette | 0.624933 | 37380.5 |            10 |
 |         19 |        292 | 17.076   | silhouette | 0.610615 | 37380.5 |            11 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method     |    score |     eps |   min_samples |
 |-----------:|-----------:|--------:|:-----------|---------:|--------:|--------------:|
@@ -101,11 +105,11 @@ As a custom distance function it is used, the distance between trajectories are 
 
 ![](dbscan/erp_distances/silhouette/outliers.png)
 
-## hdbscan
+### hdbscan
 
-### sspd_distances
+#### sspd_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |    noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|---------:|:-----------|---------:|--------------:|-------------------:|
@@ -120,7 +124,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |          9 |         16 | 0.935673 | silhouette | 0.908218 |             9 |                100 |
 |          9 |         16 | 0.935673 | silhouette | 0.908218 |            10 |                100 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |    noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|---------:|:-----------|---------:|--------------:|-------------------:|
@@ -128,9 +132,9 @@ As a custom distance function it is used, the distance between trajectories are 
 
 ![](hdbscan/sspd_distances/silhouette/outliers.png)
 
-### erp_distances
+#### erp_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |    noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|---------:|:-----------|---------:|--------------:|-------------------:|
@@ -145,7 +149,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |          9 |         17 | 0.994152 | silhouette | 0.927281 |             7 |                100 |
 |          9 |         17 | 0.994152 | silhouette | 0.926117 |             6 |                100 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |    noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|---------:|:-----------|---------:|--------------:|-------------------:|
@@ -155,7 +159,7 @@ As a custom distance function it is used, the distance between trajectories are 
 
 # davies_bouldin
 
-## dbscan
+### dbscan
 
 Finding the best eps value.
 
@@ -165,9 +169,9 @@ In order to calculate the best eps value, first, the nearest neighbors of the da
 
 As a custom distance function it is used, the distance between trajectories are normalized and epsilon values may not be true magnitudes.
 
-### sspd_distances
+#### sspd_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |    noise | method         |   score |       eps |   min_samples |
 |-----------:|-----------:|---------:|:---------------|--------:|----------:|--------------:|
@@ -182,7 +186,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |         19 |        141 |  8.24561 | davies_bouldin | 1.13059 | 0.0141249 |             6 |
 |         19 |        141 |  8.24561 | davies_bouldin | 1.13059 | 0.0141249 |             7 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method         |   score |       eps |   min_samples |
 |-----------:|-----------:|--------:|:---------------|--------:|----------:|--------------:|
@@ -190,9 +194,9 @@ As a custom distance function it is used, the distance between trajectories are 
 
 ![](dbscan/sspd_distances/davies_bouldin/outliers.png)
 
-### erp_distances
+#### erp_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |   noise | method         |    score |     eps |   min_samples |
 |-----------:|-----------:|--------:|:---------------|---------:|--------:|--------------:|
@@ -207,7 +211,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |         26 |        221 | 12.924  | davies_bouldin | 1.10274  | 37380.5 |             7 |
 |         26 |        214 | 12.5146 | davies_bouldin | 1.12029  | 37380.5 |             6 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method         |    score |     eps |   min_samples |
 |-----------:|-----------:|--------:|:---------------|---------:|--------:|--------------:|
@@ -215,11 +219,11 @@ As a custom distance function it is used, the distance between trajectories are 
 
 ![](dbscan/erp_distances/davies_bouldin/outliers.png)
 
-## hdbscan
+### hdbscan
 
-### sspd_distances
+#### sspd_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
@@ -234,7 +238,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |         10 |         55 | 3.21637 | davies_bouldin | 0.554249 |             9 |                 80 |
 |         10 |         55 | 3.21637 | davies_bouldin | 0.554249 |            10 |                 80 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
@@ -242,9 +246,9 @@ As a custom distance function it is used, the distance between trajectories are 
 
 ![](hdbscan/sspd_distances/davies_bouldin/outliers.png)
 
-### erp_distances
+#### erp_distances
 
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
@@ -259,7 +263,7 @@ As a custom distance function it is used, the distance between trajectories are 
 |         10 |         54 | 3.15789 | davies_bouldin | 0.404378 |            13 |                 60 |
 |         10 |         54 | 3.15789 | davies_bouldin | 0.404378 |            13 |                 80 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
