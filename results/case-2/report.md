@@ -1,7 +1,11 @@
 
-# Resume
+# Case 2
 
-## Silhouette
+Flight from Barcelona to Madrid.
+
+## Resume
+
+### Silhouette
 
 Best algorithm/function distance configuration based on silhouette score.
 
@@ -14,34 +18,46 @@ Best algorithm/function distance configuration based on silhouette score.
 
 Score represents the quality of the clustering. The best score is 1.0 and the worst score is -1.0. Scores around zero indicate overlapping clusters.
 
-# Resume
+|               | dbscan  | hdbscan | 
+|---------------|:-------:|:-------:|
+| erp_distance  | ![](dbscan/erp_distances/silhouette/outliers.png) | ![](hdbscan/sspd_distances/silhouette/outliers.png) |
+| sspd_distance | ![](dbscan/erp_distances/silhouette/outliers.png) | ![](hdbscan/sspd_distances/silhouette/outliers.png) |
 
-## Davies-Bouldin
+### Davies-Bouldin
 
 Best algorithm/function distance configuration based on davies_bouldin score.
 
 |   clusters |   outliers |    noise |    score | algorithm   | distance_fn    |
 |-----------:|-----------:|---------:|---------:|:------------|:---------------|
-|         15 |         55 |  7.37265 | 1.16077  | dbscan      | sspd_distances |
-|          4 |        155 | 20.7775  | 1.1529   | dbscan      | erp_distances  |
-|          3 |        358 | 47.9893  | 0.965924 | hdbscan     | sspd_distances |
 |         12 |         66 |  8.84718 | 0.940577 | hdbscan     | erp_distances  |
+|          3 |        358 | 47.9893  | 0.965924 | hdbscan     | sspd_distances |
+|          4 |        155 | 20.7775  | 1.1529   | dbscan      | erp_distances  |
+|         15 |         55 |  7.37265 | 1.16077  | dbscan      | sspd_distances |
 
 The minimum score is zero, with lower values indicating better clustering.
 
+|               | dbscan  | hdbscan | 
+|---------------|:-------:|:-------:|
+| erp_distance  | ![](dbscan/erp_distances/davies_bouldin/outliers.png) | ![](hdbscan/sspd_distances/davies_bouldin/outliers.png) |
+| sspd_distance | ![](dbscan/erp_distances/davies_bouldin/outliers.png) | ![](hdbscan/sspd_distances/davies_bouldin/outliers.png) |
+
 -----------------------
 
-# dbscan
+# silhouette
 
-## sspd_distances
+### dbscan
 
-### silhouette
+Finding the best eps value.
 
-#### Optimal epsilon visual representation
+![](dbscan/erp_distances/silhouette/elbow.png)
 
-![](dbscan/sspd_distances/silhouette/elbow.png)
+In order to calculate the best eps value, first, the nearest neighbors of the data are calculated. Then, the points are sorted and in order to obtain a curve. Next, a line is generated that fits to the curve and the distances between each point of the curve and the line are calculated. The elbow index is the point where the distance is maximum.
 
-#### Search params result
+As a custom distance function it is used, the distance between trajectories are normalized and epsilon values may not be true magnitudes.
+
+#### sspd_distances
+
+##### Search params result
 
 |   clusters |   outliers |    noise | method     |    score |        eps |   min_samples |
 |-----------:|-----------:|---------:|:-----------|---------:|-----------:|--------------:|
@@ -56,7 +72,7 @@ The minimum score is zero, with lower values indicating better clustering.
 |          8 |         74 |  9.91957 | silhouette | 0.673669 | 0.00247358 |             4 |
 |          6 |         89 | 11.9303  | silhouette | 0.671341 | 0.00247358 |             6 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method     |   score |        eps |   min_samples |
 |-----------:|-----------:|--------:|:-----------|--------:|-----------:|--------------:|
@@ -64,44 +80,9 @@ The minimum score is zero, with lower values indicating better clustering.
 
 ![](dbscan/sspd_distances/silhouette/outliers.png)
 
-### davies_bouldin
+#### erp_distances
 
-#### Optimal epsilon visual representation
-
-![](dbscan/sspd_distances/davies_bouldin/elbow.png)
-
-#### Search params result
-
-|   clusters |   outliers |    noise | method         |   score |        eps |   min_samples |
-|-----------:|-----------:|---------:|:---------------|--------:|-----------:|--------------:|
-|         15 |         55 |  7.37265 | davies_bouldin | 1.16077 | 0.00247358 |             2 |
-|          7 |         84 | 11.2601  | davies_bouldin | 1.21686 | 0.00247358 |             5 |
-|          6 |         89 | 11.9303  | davies_bouldin | 1.22219 | 0.00247358 |             6 |
-|         12 |         61 |  8.17694 | davies_bouldin | 1.23383 | 0.00247358 |             3 |
-|          6 |         93 | 12.4665  | davies_bouldin | 1.25515 | 0.00247358 |             7 |
-|          8 |         74 |  9.91957 | davies_bouldin | 1.27035 | 0.00247358 |             4 |
-|          5 |        102 | 13.6729  | davies_bouldin | 1.39    | 0.00247358 |             8 |
-|          5 |        104 | 13.941   | davies_bouldin | 1.39938 | 0.00247358 |             9 |
-|          5 |        108 | 14.4772  | davies_bouldin | 1.41546 | 0.00247358 |            10 |
-|          5 |        108 | 14.4772  | davies_bouldin | 1.41546 | 0.00247358 |            11 |
-
-#### Best estimator result
-
-|   clusters |   outliers |   noise | method         |   score |        eps |   min_samples |
-|-----------:|-----------:|--------:|:---------------|--------:|-----------:|--------------:|
-|         15 |         55 | 7.37265 | davies_bouldin | 1.16077 | 0.00247358 |             2 |
-
-![](dbscan/sspd_distances/davies_bouldin/outliers.png)
-
-## erp_distances
-
-### silhouette
-
-#### Optimal epsilon visual representation
-
-![](dbscan/erp_distances/silhouette/elbow.png)
-
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |   noise | method     |    score |     eps |   min_samples |
 |-----------:|-----------:|--------:|:-----------|---------:|--------:|--------------:|
@@ -116,7 +97,7 @@ The minimum score is zero, with lower values indicating better clustering.
 |          5 |        133 | 17.8284 | silhouette | 0.668961 | 14915.3 |            11 |
 |          5 |        135 | 18.0965 | silhouette | 0.665258 | 14915.3 |            12 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method     |    score |     eps |   min_samples |
 |-----------:|-----------:|--------:|:-----------|---------:|--------:|--------------:|
@@ -124,42 +105,11 @@ The minimum score is zero, with lower values indicating better clustering.
 
 ![](dbscan/erp_distances/silhouette/outliers.png)
 
-### davies_bouldin
+### hdbscan
 
-#### Optimal epsilon visual representation
+#### sspd_distances
 
-![](dbscan/erp_distances/davies_bouldin/elbow.png)
-
-#### Search params result
-
-|   clusters |   outliers |   noise | method         |   score |     eps |   min_samples |
-|-----------:|-----------:|--------:|:---------------|--------:|--------:|--------------:|
-|          4 |        155 | 20.7775 | davies_bouldin | 1.1529  | 14915.3 |            15 |
-|          7 |         95 | 12.7346 | davies_bouldin | 1.18059 | 14915.3 |             5 |
-|          7 |        108 | 14.4772 | davies_bouldin | 1.19655 | 14915.3 |             7 |
-|          7 |        111 | 14.8794 | davies_bouldin | 1.20367 | 14915.3 |             8 |
-|          8 |         98 | 13.1367 | davies_bouldin | 1.21891 | 14915.3 |             6 |
-|          6 |        123 | 16.4879 | davies_bouldin | 1.23216 | 14915.3 |            10 |
-|          6 |        120 | 16.0858 | davies_bouldin | 1.2378  | 14915.3 |             9 |
-|          5 |        133 | 17.8284 | davies_bouldin | 1.29855 | 14915.3 |            11 |
-|          5 |        136 | 18.2306 | davies_bouldin | 1.30097 | 14915.3 |            13 |
-|          5 |        135 | 18.0965 | davies_bouldin | 1.30117 | 14915.3 |            12 |
-
-#### Best estimator result
-
-|   clusters |   outliers |   noise | method         |   score |     eps |   min_samples |
-|-----------:|-----------:|--------:|:---------------|--------:|--------:|--------------:|
-|          4 |        155 | 20.7775 | davies_bouldin |  1.1529 | 14915.3 |            15 |
-
-![](dbscan/erp_distances/davies_bouldin/outliers.png)
-
-# hdbscan
-
-## sspd_distances
-
-### silhouette
-
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |   noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:-----------|---------:|--------------:|-------------------:|
@@ -174,7 +124,7 @@ The minimum score is zero, with lower values indicating better clustering.
 |         12 |         97 | 13.0027 | silhouette | 0.396985 |            10 |                  2 |
 |         13 |         94 | 12.6005 | silhouette | 0.393922 |             9 |                  2 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:-----------|---------:|--------------:|-------------------:|
@@ -182,36 +132,9 @@ The minimum score is zero, with lower values indicating better clustering.
 
 ![](hdbscan/sspd_distances/silhouette/outliers.png)
 
-### davies_bouldin
+#### erp_distances
 
-#### Search params result
-
-|   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
-|-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
-|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                100 |
-|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                120 |
-|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                140 |
-|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             2 |                100 |
-|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             2 |                120 |
-|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             2 |                140 |
-|          3 |        360 | 48.2574 | davies_bouldin | 0.970139 |             3 |                100 |
-|          3 |        360 | 48.2574 | davies_bouldin | 0.970139 |             3 |                120 |
-|          3 |        360 | 48.2574 | davies_bouldin | 0.970139 |             3 |                140 |
-|          3 |        361 | 48.3914 | davies_bouldin | 0.972103 |             4 |                100 |
-
-#### Best estimator result
-
-|   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
-|-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
-|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                100 |
-
-![](hdbscan/sspd_distances/davies_bouldin/outliers.png)
-
-## erp_distances
-
-### silhouette
-
-#### Search params result
+##### Search params result
 
 |   clusters |   outliers |    noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|---------:|:-----------|---------:|--------------:|-------------------:|
@@ -226,7 +149,7 @@ The minimum score is zero, with lower values indicating better clustering.
 |          9 |        105 | 14.0751  | silhouette | 0.503249 |            11 |                 10 |
 |          8 |        124 | 16.622   | silhouette | 0.502214 |            12 |                  5 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method     |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:-----------|---------:|--------------:|-------------------:|
@@ -234,9 +157,98 @@ The minimum score is zero, with lower values indicating better clustering.
 
 ![](hdbscan/erp_distances/silhouette/outliers.png)
 
-### davies_bouldin
+# davies_bouldin
 
-#### Search params result
+### dbscan
+
+Finding the best eps value.
+
+![](dbscan/erp_distances/davies_bouldin/elbow.png)
+
+In order to calculate the best eps value, first, the nearest neighbors of the data are calculated. Then, the points are sorted and in order to obtain a curve. Next, a line is generated that fits to the curve and the distances between each point of the curve and the line are calculated. The elbow index is the point where the distance is maximum.
+
+As a custom distance function it is used, the distance between trajectories are normalized and epsilon values may not be true magnitudes.
+
+#### sspd_distances
+
+##### Search params result
+
+|   clusters |   outliers |    noise | method         |   score |        eps |   min_samples |
+|-----------:|-----------:|---------:|:---------------|--------:|-----------:|--------------:|
+|         15 |         55 |  7.37265 | davies_bouldin | 1.16077 | 0.00247358 |             2 |
+|          7 |         84 | 11.2601  | davies_bouldin | 1.21686 | 0.00247358 |             5 |
+|          6 |         89 | 11.9303  | davies_bouldin | 1.22219 | 0.00247358 |             6 |
+|         12 |         61 |  8.17694 | davies_bouldin | 1.23383 | 0.00247358 |             3 |
+|          6 |         93 | 12.4665  | davies_bouldin | 1.25515 | 0.00247358 |             7 |
+|          8 |         74 |  9.91957 | davies_bouldin | 1.27035 | 0.00247358 |             4 |
+|          5 |        102 | 13.6729  | davies_bouldin | 1.39    | 0.00247358 |             8 |
+|          5 |        104 | 13.941   | davies_bouldin | 1.39938 | 0.00247358 |             9 |
+|          5 |        108 | 14.4772  | davies_bouldin | 1.41546 | 0.00247358 |            10 |
+|          5 |        108 | 14.4772  | davies_bouldin | 1.41546 | 0.00247358 |            11 |
+
+##### Best estimator result
+
+|   clusters |   outliers |   noise | method         |   score |        eps |   min_samples |
+|-----------:|-----------:|--------:|:---------------|--------:|-----------:|--------------:|
+|         15 |         55 | 7.37265 | davies_bouldin | 1.16077 | 0.00247358 |             2 |
+
+![](dbscan/sspd_distances/davies_bouldin/outliers.png)
+
+#### erp_distances
+
+##### Search params result
+
+|   clusters |   outliers |   noise | method         |   score |     eps |   min_samples |
+|-----------:|-----------:|--------:|:---------------|--------:|--------:|--------------:|
+|          4 |        155 | 20.7775 | davies_bouldin | 1.1529  | 14915.3 |            15 |
+|          7 |         95 | 12.7346 | davies_bouldin | 1.18059 | 14915.3 |             5 |
+|          7 |        108 | 14.4772 | davies_bouldin | 1.19655 | 14915.3 |             7 |
+|          7 |        111 | 14.8794 | davies_bouldin | 1.20367 | 14915.3 |             8 |
+|          8 |         98 | 13.1367 | davies_bouldin | 1.21891 | 14915.3 |             6 |
+|          6 |        123 | 16.4879 | davies_bouldin | 1.23216 | 14915.3 |            10 |
+|          6 |        120 | 16.0858 | davies_bouldin | 1.2378  | 14915.3 |             9 |
+|          5 |        133 | 17.8284 | davies_bouldin | 1.29855 | 14915.3 |            11 |
+|          5 |        136 | 18.2306 | davies_bouldin | 1.30097 | 14915.3 |            13 |
+|          5 |        135 | 18.0965 | davies_bouldin | 1.30117 | 14915.3 |            12 |
+
+##### Best estimator result
+
+|   clusters |   outliers |   noise | method         |   score |     eps |   min_samples |
+|-----------:|-----------:|--------:|:---------------|--------:|--------:|--------------:|
+|          4 |        155 | 20.7775 | davies_bouldin |  1.1529 | 14915.3 |            15 |
+
+![](dbscan/erp_distances/davies_bouldin/outliers.png)
+
+### hdbscan
+
+#### sspd_distances
+
+##### Search params result
+
+|   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
+|-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
+|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                100 |
+|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                120 |
+|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                140 |
+|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             2 |                100 |
+|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             2 |                120 |
+|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             2 |                140 |
+|          3 |        360 | 48.2574 | davies_bouldin | 0.970139 |             3 |                100 |
+|          3 |        360 | 48.2574 | davies_bouldin | 0.970139 |             3 |                120 |
+|          3 |        360 | 48.2574 | davies_bouldin | 0.970139 |             3 |                140 |
+|          3 |        361 | 48.3914 | davies_bouldin | 0.972103 |             4 |                100 |
+
+##### Best estimator result
+
+|   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
+|-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|
+|          3 |        358 | 47.9893 | davies_bouldin | 0.965924 |             1 |                100 |
+
+![](hdbscan/sspd_distances/davies_bouldin/outliers.png)
+
+#### erp_distances
+
+##### Search params result
 
 |   clusters |   outliers |    noise | method         |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|---------:|:---------------|---------:|--------------:|-------------------:|
@@ -251,7 +263,7 @@ The minimum score is zero, with lower values indicating better clustering.
 |         12 |         66 |  8.84718 | davies_bouldin | 0.956361 |             8 |                 10 |
 |          6 |        156 | 20.9115  | davies_bouldin | 0.962871 |            11 |                 40 |
 
-#### Best estimator result
+##### Best estimator result
 
 |   clusters |   outliers |   noise | method         |    score |   min_samples |   min_cluster_size |
 |-----------:|-----------:|--------:|:---------------|---------:|--------------:|-------------------:|

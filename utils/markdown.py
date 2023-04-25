@@ -17,5 +17,19 @@ def generate_results_table_markdown(results):
       df = df.drop('params', axis=1)
     return f'\n{df.head(10).to_markdown(index=False)}\n'
 
+def generate_outliers_table_markdown(distance_fn):
+    return """
+|               | dbscan  | hdbscan | 
+|---------------|:-------:|:-------:|
+| erp_distance  | ![](%s) | ![](%s) |
+| sspd_distance | ![](%s) | ![](%s) |
+""" % (
+    f'dbscan/erp_distances/{distance_fn}/outliers.png',
+    f'hdbscan/sspd_distances/{distance_fn}/outliers.png',
+    f'dbscan/erp_distances/{distance_fn}/outliers.png',
+    f'hdbscan/sspd_distances/{distance_fn}/outliers.png',
+)
+
+
 def generate_separation_markdown():
     return '\n-----------------------\n'

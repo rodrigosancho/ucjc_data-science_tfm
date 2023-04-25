@@ -52,8 +52,8 @@ def build_models_pipeline():
         ], n_jobs = -1))
     ])
 
-def build_reporting_pipeline(report_path):
+def build_reporting_pipeline(report_path, report_data):
     return Pipeline([
         ('generate_graphs', GenerateGraphs(report_path)),
-        ('generate_report', GenerateReport(report_path))
+        ('generate_report', GenerateReport(report_path, report_data))
     ])
